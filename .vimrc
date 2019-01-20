@@ -1,26 +1,64 @@
-"set termguicolors
-set cursorline
+"""""""""""""""""""""""""""""""""""""
+"           GENERAL CONFIG          "
+"""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off
+syntax on
 set number
+set ruler
 set hlsearch
-set background=dark
-colorscheme falcon
+set encoding=utf-8
+set fileencoding=utf-8
 
-highlight LineNr guibg=#000000 guifg=#6A655A
-highlight CursorLine guibg=#1C1C1C cterm=NONE
-highlight CursorLineNR guifg=#8A8A8A guibg=#3A3A3A cterm=bold
-highlight Search guibg=#ffffff guifg=#000000 cterm=bold
-highlight Comment guibg=#8B8A8B guifg=#000000
+" Vundle init
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-" Cursor
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Set Proper Tabs
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
 
-" Uso del editor
-set ic
+" Always display the status line
+set laststatus=2
 
-" status bar colors
-au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+" Enable highlighting of the current line
+set cursorline
 
+" Plugins
+Plugin 'Yggdroot/indentLine'
+Plugin 'ayu-theme/ayu-vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/rainbow_parentheses.vim'
+
+" Nerdtree config
+nmap <C-n> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Vundle last lines
+call vundle#end()
+filetype plugin indent on
+
+" Colorscheme
+set termguicolors
+let ayucolor="dark"
+colorscheme ayu
+
+" Config comentarios
+let mapleader=","
+
+" Rainbow
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
